@@ -1,0 +1,48 @@
+CakePHP Amazon eCommerce datasource
+
+Copyright 2009, Ministry of Web Development, http://www.cake-toppings.com
+
+This library is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this library.  If not, see <http://www.gnu.org/licenses/>.
+
+---------------------------------------------------------------------
+
+Requirements :
+
+PHP5
+Cakephp 1.2
+Amazon free AWS account: http://aws.amazon.com/
+
+Usage :
+
+Copy the amazon_ecommerce_source.php file to your app/models/datasources/ directory
+
+Add a configuration to your database.php in app/config/
+
+var $soap = array(
+    'datasource' => 'amazon_ecommerce',
+    'accessKey' => '****' // accesskey of your amazon account
+	'secretKey' => '*****' // accesskey of your amazon account
+);
+
+Then in your model set:
+
+var $useDbConfig = 'amazon_ecommerce';
+var $useTable = false;
+
+And you're ready to go.
+
+In your controller you can now use
+$this->Model->query('all', array('type'=>'Music', 'keywords' => 'Rick Astley'));
+or
+$this->Model->query(array('type'=>'Music', 'keywords' => 'Rick Astley'));
