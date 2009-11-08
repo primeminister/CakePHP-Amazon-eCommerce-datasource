@@ -32,7 +32,7 @@ Add a configuration to your database.php in app/config/
 var $soap = array(
     'datasource' => 'amazon_ecommerce',
     'accessKey' => '****' // accesskey of your amazon account
-	'secretKey' => '*****' // accesskey of your amazon account
+	'secretKey' => '*****' // secretKey of your amazon account
 );
 
 Then in your model set:
@@ -46,3 +46,16 @@ In your controller you can now use
 $this->Model->query('all', array('type'=>'Music', 'keywords' => 'Rick Astley'));
 or
 $this->Model->query(array('type'=>'Music', 'keywords' => 'Rick Astley'));
+
+More info:
+https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html
+http://docs.amazonwebservices.com/AWSECommerceService/2009-10-01/DG/
+
+Method and Operations mapping available at the moment:
+first = ItemLookup
+all = ItemSearch
+http://docs.amazonwebservices.com/AWSECommerceService/2009-10-01/DG/CHAP_OperationListAlphabetical.html
+
+
+
+See all availabel command for Amazon eCommerce API here:
