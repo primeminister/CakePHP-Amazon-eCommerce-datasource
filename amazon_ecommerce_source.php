@@ -2,17 +2,16 @@
 /**
  * A CakePHP datasource for interacting with the amazon eCommerce API.
  *
- * Copyright 2009, Ministry of Web Development
+ * Copyright 2009-2011, Ministry of Web Development
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright Copyright 2009, Ministry of Web Development
+ * @copyright Copyright 2009-2011, Ministry of Web Development
  * @version 0.1
  * @package datasources
  * @author Charlie van de Kerkhof <primeminister@mowd.nl>
  * @license http://www.opensource.org/licenses/mit-license.php The MIT License
- * @subversion $Id: $
  */
 
 class AmazonEcommerceSource extends DataSource {
@@ -88,7 +87,7 @@ class AmazonEcommerceSource extends DataSource {
 	public function connect($config) {
 		$this->error = null;
 		if (empty($config['accessKey']) || empty($config['secretKey'])) {
-			$this->error = "Please prove your accessKey and secretKey to the database config";
+			$this->error = "Please provide your accessKey and secretKey to the database config";
 			$this->showError();
 			return false;
 		}
@@ -141,7 +140,7 @@ class AmazonEcommerceSource extends DataSource {
 		}
 
 		if(!$method || !$queryData) {
-			$this->error = "Please prove a method or keywords";
+			$this->error = "Please provide a method or keywords";
 			$this->showError();
 			return false;
 		}
@@ -340,5 +339,4 @@ class AmazonEcommerceSource extends DataSource {
 	public function listSources() {
 		return $this->client->__getFunctions();
 	}
-}   
-?>
+}
