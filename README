@@ -32,7 +32,7 @@ Add a configuration to your database.php in app/config/
 var $amazon_ecommerce = array(
     'datasource' => 'amazon_ecommerce',
     'accessKey' => '****' // accesskey of your amazon account
-	'secretKey' => '*****' // secretKey of your amazon account
+    'secretKey' => '*****' // secretKey of your amazon account
 );
 
 Then in your model set:
@@ -46,15 +46,21 @@ In your controller you can now use
 $this->Model->query('all', array('type'=>'Music', 'keywords' => 'Rick Astley'));
 or
 $this->Model->query(array('type'=>'Music', 'keywords' => 'Rick Astley'));
+or
+$this->Model->query(array('keywords' => 'Rick Astley')); //it will do a search for all product types with 'Rick Astley' as a keyword
+or
+$this->Model->query('Rick Astley'); //it will do a search for all product types with 'Rick Astley' as a keyword
+
+Though all 4 work, it is recommended to stick to the first way of fetching your data.
 
 More info:
 https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html
-http://docs.amazonwebservices.com/AWSECommerceService/2009-10-01/DG/
+http://docs.amazonwebservices.com/AWSECommerceService/2010-10-01/DG/
 
 Method and Operations mapping available at the moment:
 first = ItemLookup
 all = ItemSearch
-See all availabel command for Amazon eCommerce API here:
-http://docs.amazonwebservices.com/AWSECommerceService/2009-10-01/DG/CHAP_OperationListAlphabetical.html
+See all available command for Amazon eCommerce API here:
+http://docs.amazonwebservices.com/AWSECommerceService/2010-10-01/DG/index.html?CHAP_OperationListAlphabetical.html
 
 
