@@ -181,7 +181,7 @@ class AmazonEcommerceSource extends DataSource {
 			'AWSAccessKeyId' => $this->config['accessKey'],
 			'ResponseGroup' => 'Small',
 			'Timestamp' => date('c'),
-			'Version' => '2009-03-31'
+			'Version' => '20-10-01'
 		), $queryData);
 		// sign query
 		$queryData = $this->_signRequest($queryData);
