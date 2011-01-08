@@ -131,12 +131,26 @@ class AmazonEcommerceSource extends DataSource {
 		$method = null;
 		$queryData = null;
 
-		if (count($args) == 2) {
+        //passing 1 argument (array or string)
+		if (count($args) == 1 and is_array($args[0]) and array_key_exists('type', $args[0])) {
+			$method = 'all';
+			$queryData = $args[0];
+		} elseif (count($args) == 1 and is_array($args[0]) and array_key_exists('keywords', $args[0])) {
+			$method = 'all';
+			$queryData = $args[0];
+			$queryData['type'] = 'Blended';
+		} elseif (count($args) == 1 and !is_array($args[0])) {
+			$method = 'all';
+			$queryData = array('type' => 'Blended', 'keywords' => $args[0]);
+		}
+		
+		//passing 2 arguments
+		elseif (count($args) == 2 and is_array($args[1])) {
 			$method = $args[0];
 			$queryData = $args[1];
-		} elseif (count($args) > 2 && !empty($args[1])) {
+		} elseif (count($args) == 2 and !is_array($args[1])) {
 			$method = $args[0];
-			$queryData = $args[1][0];
+			$queryData = array('keywords' => $args[1]);
 		}
 
 		if(!$method || !$queryData) {
@@ -145,20 +159,17 @@ class AmazonEcommerceSource extends DataSource {
 			return false;
 		}
 
-		if (!is_array($queryData)) {
-			$queryData = array('Keywords' => $query);
-		}
 		// setup operation
 		if ($method == 'first') {
 		    $queryData['Operation'] = 'ItemLookup';
 	    } else {
 	        $queryData['Operation'] = 'ItemSearch';
         }
-	// re-map shortcut parameters to the new AWS parameters
+		// re-map shortcut parameters to the new AWS parameters
         $map  = array(
             'info'  => 'ResponseGroup',
-            'type'  => 'SearchIndex',
-            'id'    => 'ItemId'
+			'type'  => 'SearchIndex',
+			'id'    => 'ItemId'
         );
 		foreach ($map as $old => $new) {
             if (isset($queryData[$old])) {
@@ -180,8 +191,9 @@ class AmazonEcommerceSource extends DataSource {
 			'AWSAccessKeyId' => $this->config['accessKey'],
 			'ResponseGroup' => 'Small',
 			'Timestamp' => date('c'),
-			'Version' => '20-10-01'
+			'Version' => '2010-10-01'
 		), $queryData);
+		
 		// sign query
 		$queryData = $this->_signRequest($queryData);
 
