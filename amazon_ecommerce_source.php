@@ -154,12 +154,11 @@ class AmazonEcommerceSource extends DataSource {
 	    } else {
 	        $queryData['Operation'] = 'ItemSearch';
         }
-		// re-map shortcut parameters to the new AWS parameters
+	// re-map shortcut parameters to the new AWS parameters
         $map  = array(
-            'title' => 'Keywords',
             'info'  => 'ResponseGroup',
-			'type'  => 'SearchIndex',
-			'id'    => 'ItemId'
+            'type'  => 'SearchIndex',
+            'id'    => 'ItemId'
         );
 		foreach ($map as $old => $new) {
             if (isset($queryData[$old])) {
